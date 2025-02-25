@@ -1,0 +1,19 @@
+删除文件
+首先克隆文件夹到本地
+$ git clone https://github.com/Jiake404/GlacierLake_v2.git
+
+切到要删除的文件夹
+$ cd GlacierLake_v2
+
+删除文件夹及其中的所有内容
+$ git rm -r GlacierLake_v2
+
+提交更改
+$ git commit -m "Delete GlacierLake folder"
+会弹出输入邮箱和名字
+$ git config user.name "Jiake404"
+$ git config user.email "wujk25@mail2.sysu.edu.cn"
+$ git commit -m "Delete GlacierLake_v2 folder"
+
+推送更改到Github
+$ git push origin main

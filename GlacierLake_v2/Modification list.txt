@@ -1,0 +1,43 @@
+The main code for GlacierLake_v2 is main_v2.m
+
+Note: Functions with names ending in a number or '_new' are improvements on the original functions. For example, 'import_AWS1.m' is an improved version of 'import_AWS.m', and 'conduct_update_enthalpy_new.m' is an improved version of 'conductupdate_enthalpy.m'.
+
+1. The function 'spin_up.m' is added to output initial conditions, and users can customize  spin-up years by changing the value of 'sp_year'.
+
+2. The function 'runoff_prod.m' is added to output meltwater.
+
+3. The function 'longwave_in1.m' outputs downward longwave radiation with less input for ice and snow, and the parameterization has not changed. It is primarily used in the 'spin_up' and 'runoff_prod' functions.
+
+4. The function 'conduct_update_enthalpy1.m' specifically performs heat conduction calculations for ice and snow with less input in 'spin_up.m' and 'runoff_prod.m'.
+
+5. The function 'cal_lakealbedo.m' provides two lake albedo parameterizations, selectable by setting 'albedo_num'.
+
+6.The function 'readtime.m' is added to clip meteorological data by model run time.
+
+7. Consolidate parameter Settings into a single function: 'cons_output.m'.
+
+8. The function 'import_AWS1.m'can directly read both PROMICE and GC-Net data without any additional conversion by setting 'gcnet_num' and outputs spin-up data.
+
+9. This function 'import_snow1.m' clips precipitation (total precipitation, snowfall and rainfall) data and outputs spin-up data.
+
+10. The function 'initialise_snow1.m' no longer outputs snow water equivalent, it is calculated in the main function.
+
+11. The function 'update_snow_a1.m' no longer outputs snow water equivalent, it is calculated in the main function; and all 'precip_out(1)' representing total precipitation in 'update_snow_a.m' are changed to 'precip_out(2)' to represent snowfall.
+
+12. The function 'update_snow_b2.m' does not update 'snow_lambda' and 'snow_ice' due to the retention and refreezing of liquid water in the snow; they are updated in the main function. It is used in 'spin_up.m'and 'runoff_prod.m'.
+
+13. The function 'temp_lambda_profile1.m' adds the transition from stage 4 to stage 3.
+
+14. During each iteration, when meltwater input requires the insertion of a grid, the main model domain is immediately adjusted. This process is included in the function 'lake_insert.m', which replaces 'hydrograph_initialise.m' and 'hydrograph_initialise.m'. Due to the immediate adjustment in the main model domain, 'conduct_update_enthalpy_new.m', 'SW_propagate1.m', and 'convection1.m' no longer need to add grids representing meltwater input in the calculations for stages 3 and 5.
+
+15. The function 'surface_flux1.m' outputs the total energy entering the lake and other components of the energy balance.
+
+16. In the function 'turbulent_flux1.m', when calculating turbulent exchange between the lake and thebottom ice, 'T_melt' is replaced to 'T(max(lake_ind)+1)'.
+
+17. In 'lake_index.m', the conditions for indexing the ice-water interface are not parallel. In 'lake_index_new.m', the conditions following 'if' (any(ice_ind(1:ice_substrate_top-1)==1)) and 'elseif' (ice_substrate_top~=1) are run separately.
+
+
+
+
+
+
